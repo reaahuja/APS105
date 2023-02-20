@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main(void) {
+  int radius = 0;
+  printf("Enter the radius of the circle: ");
+  //user is asked to enter the radius for the circle 
+  scanf(" %d", &radius);
+  
+  int value = 0;
+  //y values range from the radius to the -radius 
+    for (int y = radius; y >= -radius; y--){
+      //x values range from -radius to the radius 
+        for(int x = -radius; x <= radius; x++){
+          //value stores the y value for the specified x value
+            value = sqrt((radius*radius) - (x*x));
+            //floors value in order to get appropriate value
+            value = floor(value);
+            if (y > 0){
+              //if the y value is positive this if statement will be entered 
+
+              //if the y value is less then or equal to the value calculate from the equation, an O will be printed
+              if (y <= (value)){
+                printf("o");
+              }else{
+                printf(".");
+              }
+            }else{
+              if (-y <= (value)){
+                //if the y value is negative this if statement will be entered 
+                //if y value now made positive is less then or equal to the value calculated, a O will be printed
+                printf("o");
+             }else{
+                printf(".");
+              }
+            }
+        }
+        printf("\n");
+    }
+    return 0;
+}
