@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void){ 
+    // initalize and declare variables 
+    double weight = 0, height = 0;
+    char weightChar1, weightChar2, heightChar1, heightChar2;
+    double totalWeight = 0, totalHeight = 0, bmi = 0;
+
+    // get information 
+    printf("Enter the body weight:");
+    scanf("%lf %c %c", &weight, &weightChar1, &weightChar2);
+
+    weight = fabs(weight);
+
+    printf(" Enter the height: \n");
+    scanf("%lf %c %c", &height, &heightChar1, &heightChar2);
+
+    height = fabs(height);
+
+    //determine weight value
+    if (weightChar1 == 'k'){
+        totalWeight = weight;
+    }else{
+        totalWeight = weight/2.205;
+    }
+
+
+
+    //determine height value
+    if(heightChar1 == 'm'){
+        totalHeight = height;
+    }else if (heightChar1 == 'i'){
+        totalHeight = height/39.37;
+    }else{
+        //user entered feet
+        totalHeight = height/3.28;
+    }
+
+    bmi = totalWeight/(pow(totalHeight,2));
+    // bmi = rint(bmi*10)/10;
+
+    printf("The Body Mass Index (BMI) is: %.1lf\n", bmi);
+
+    if (bmi < 18.5){
+        printf("Category: Underweight");
+    }else if ((bmi > 18.5) && (bmi <= 24.99)){
+         printf("Category: Healthy Weight");
+    }else if ((bmi > 25.00) && (bmi <= 29.99)){
+         printf("Category: Overweight");
+    }else{
+         printf("Category: Obesity");
+    }
+
+
+}
