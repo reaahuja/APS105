@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void){ 
+    int encComb;
+    printf("Enter an encrypted 4-digit combination: ");
+    scanf("%d", &encComb);
+  
+    int d4, d3, d2, d1;
+
+    d1 = encComb%10;
+    encComb = encComb/10;
+    d2 = encComb%10;
+    encComb = encComb/10;
+    d3 = encComb%10;
+    encComb = encComb/10;
+    d4 = encComb%10;
+    encComb = encComb/10;
+
+    printf("\nThe real combination is: %d%d%d%d\n", d1, 9 - d3, 9 - d2, d4);
+    return 0;
+
+
+}
