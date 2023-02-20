@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void){
+    double x = 0, y = 0, h = 0, deg = 0;
+
+    printf("Enter X: ");
+    scanf("%lf", &x);
+    printf("Enter Y: ");
+    scanf("%lf", &y);
+
+    x = fabs(x);
+    y = fabs(y);
+
+    h = sqrt(pow(x, 2) + pow(y, 2));
+    deg = asin((y/h));
+
+    deg = deg * (180/M_PI);
+
+
+     
+     printf("The Hypotenuse Length is: %.1lf\n", h);
+     printf("The Angle Theta is: %.1lf degrees\n", deg);
+
+     return 0;
+    
+    
+
+}
