@@ -1,0 +1,72 @@
+#include <stdbool.h>
+#include <stdio.h>
+bool isShuffled(int);
+int getNumDigits(int);
+int getSmallestDigit(int);
+bool lookForDigit(int, int);
+
+int main(void) {
+  int num;
+  bool value = true;
+  printf("Enter the number to check: ");
+  scanf("%d", &num);
+  value = isShuffled(num);
+  if (value == true) {
+    printf("Shuffled!");
+  } else {
+    printf("Not shuffled!");
+  }
+  return 0;
+}
+bool isShuffled(int shuffledOrder) {
+  bool isShuffled = true;
+  int numOfDigits = getNumDigits(shuffledOrder);
+  int smallestDigit = getSmallestDigit(shuffledOrder);
+  //remove equal sign in condition 
+  for (int place = 1; (place < numOfDigits) && isShuffled == true; place++) {
+    if (lookForDigit(shuffledOrder, smallestDigit + place) == false) {
+      isShuffled = false;
+      return isShuffled;
+    }
+  }
+  return isShuffled;
+}
+
+int getNumDigits(int num) {
+  int count = 0;
+  //changed while from <= 0 to != 0
+  while (num != 0) {
+    num = num / 10;
+    count++;
+  }
+  return count;
+}
+int getSmallestDigit(int num) {
+  int smallestDigit = num % 10;
+  int digit = 0;
+  while (num != 0) {
+    digit = num % 10;
+    if (digit < smallestDigit) {
+      smallestDigit = digit;
+    }
+    num /= 10;
+  }
+  //return smallestDigit instead of digit 
+  return smallestDigit;
+}
+
+bool lookForDigit(int num, int searchDigit) {
+  int digit = 0;
+  bool foundDigit = false;
+  //changed operator from || to &&
+  while (num != 0 && foundDigit == false) {
+    digit = num % 10;
+    if (digit == searchDigit) {
+      foundDigit = true;
+    }else{
+      num /= 10;
+    }
+  }
+  //return foundDigit instead of digit 
+  return foundDigit;
+}
