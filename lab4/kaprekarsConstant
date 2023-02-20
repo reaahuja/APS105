@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+
+int getNumber(){
+//gets the number from the user 
+    int number = 0;    
+    printf("Enter a number (-1 to stop): ");
+    scanf(" %d", &number);
+
+    return number;
+}
+
+int reverseNumber(int number){
+//reverses the ascending number recieved to return the ascending number
+    int reverseNumber = 0;
+
+    for (int i = 3; i >= 0; i--){
+        reverseNumber += number%10 * pow(10, i);
+        number = number/10;
+    }
+
+    return reverseNumber;
+}
+
+bool checkNumber(int number){
+    int counter = 0;
+    bool valid = true;
+    //checks if the user wants to exit the code 
+    if (number != -1){
+    //gets the number of digits 
+        while (number != 0){
+        number = number/10;
+        counter++;
+    }
+
+    if (counter == 4){
+        valid = true;
+        }else{
+        //if number of digits is not 4 an appropriate statement is printed
+        if (counter < 4){
+            printf("Error: The number is too small.\n");
+        }else{
+            printf("Error: The number is too large.\n");
+        }
+        valid = false;
+        }
+    }
+    
+    return valid;
+}
+
+
+int main (void){
+    /*
+    Steps: 
+    1. Get input 
+    2. Arrange number in ascending order
+    3. Arrange number in descending order
+    4. Substract descending number with ascending number 
+    5. Check if difference is equal to 6174
+        a) if yes then stop and announce the number of iterations 
+        b) if no then continue with the difference number 
+    */
+
+   int number = 0, ascending = 0, descending = 0, counter = 1;
+   bool validator = true;
+    number = getNumber();
+    //number is checked - if it has 4 digits 
+    validator = checkNumber(number);
+    while(validator == false){
+    //if the number does not follow the expectations the user is asked to enter a number again
+        number = getNumber();
+        validator = checkNumber(number);
+    }
+    
+   while(number != -1){
+
+        while(number != 6174){
+        //performs calculations by retrieving ascending number, descending number and getting the difference
+        //calculation is continued until the number is equal to the desired constant
+                printf("Number %d: %d\n", counter, number);
+                ascending = getAscendingOrderedDigits(number);
+                descending = reverseNumber(ascending);
+
+                number = descending - ascending;
+        //counter is incremented to find the number of iterations
+                counter++;
+        }
+
+        if(number == 6174){
+        //onece number is reached, statement is entered and number of iterations is printed
+            printf("Number %d: %d\n", counter, number);
+            counter = counter - 1;
+            printf("Kaprekar's Constant was reached in %d iteration(s)\n", counter);
+            number = 0, ascending = 0, descending = 0, counter = 1;
+            
+        }
+        //user is asked for a number again
+        number = getNumber();
+        //checks if the number is equal to a valid input 
+        validator = checkNumber(number);
+        while(validator == false){
+        number = getNumber();
+        validator = checkNumber(number);
+        }
+   }
+
+
+
+   return 0;
+}
