@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main(void){
+    double convertRate = 0, convertAmount = 0, cadAmount = 0; 
+    printf("Enter the conversion rate:");
+    scanf("%lf", &convertRate);
+    printf(" Enter the amount to be converted (in foreign currency):");
+    scanf("%lf", &convertAmount);
+
+    cadAmount = convertRate*convertAmount;
+    printf(" The amount in Canadian Dollars is: %.2lf", cadAmount);
+
+
+    return 0;
+    
+
+}
