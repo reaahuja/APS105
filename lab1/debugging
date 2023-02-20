@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void){
+    const double CmPerInch = 2.54;
+	const double CmPerMetre = 100.00;
+	const int InchesPerFoot = 12;
+	const int InchesPerYard = 36;
+
+    //Had to change a few things from double to int and add brackets
+	
+	double distance = 0;
+	printf("Please provide a distance in metres: ");
+	scanf("%lf", &distance);
+
+	
+	double distanceInInchesCalc = (distance * CmPerMetre) / CmPerInch;
+    double distanceInInches = fabs(distanceInInchesCalc);
+    
+	
+	// truncate fractional part to get # of inches
+	int inches = distanceInInches/1;
+	distanceInInches = distanceInInches - inches;
+	
+	int yards = inches / InchesPerYard;
+	
+	// how many inches are left after extracting yards
+	inches = inches % InchesPerYard;
+	
+	int feet = inches / InchesPerFoot;
+	
+	// how many inches are left after extracting feet
+	inches = inches % InchesPerFoot;
+
+    if (distance >= 0){
+        printf("%d yards, %d feet, %d inches, %.2f inches remainder\n", yards, feet, inches, distanceInInches);
+    }else{
+        printf("%d yards, %d feet, %d inches, %.2f inches remainder\n", -yards, -feet, -inches, -distanceInInches);
+
+    }
+	
+	
+	return 0;
+
+}
