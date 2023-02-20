@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main(void){
+    int decimalNum = 0;
+    int firstBinary = 0, secondBinary = 0, thirdBinary = 0, fourthBinary = 0;
+    printf("Enter number to convert to base 2: ");
+    scanf("%d", &decimalNum);
+
+        printf("The four digits of that number are as follows:\n");
+        //calculate first binary number
+        firstBinary = decimalNum%2;
+
+        //calculate second binary number
+        decimalNum = decimalNum/2;
+        secondBinary = decimalNum%2;
+
+        //calculate third binary number
+        decimalNum = decimalNum/2;
+        thirdBinary = decimalNum%2;
+
+        //calculate fourth binary number
+        decimalNum = decimalNum/2;
+        fourthBinary = decimalNum%2;
+
+        //print everything out in reverse order
+        printf("Most significant digit: %d\n", fourthBinary);
+        printf("Next digit: %d\n", thirdBinary);
+        printf("Next digit: %d\n", secondBinary);
+        printf("Least significant digit: %d\n", firstBinary);
+
+        return 0;
+
+}
