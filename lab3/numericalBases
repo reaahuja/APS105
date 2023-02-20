@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+
+int main(void){
+    char operation;
+    printf("Give input ($ to stop): ");
+    scanf(" %c ", &operation);
+
+    while (operation != '$'){
+        int inBase = 0, num1 = 0, num2 = 0, outBase = 0, base1num1 = 0, counter = 0, base1num2 = 0;
+        bool test1 = true, test2 = true, test31 = true, test32 = true;
+
+        scanf(" %d %d %d %d", &inBase, &num1, &num2, &outBase);
+
+        if((operation != '+') && (operation != '-') && (operation != '*') && (operation != '/')){
+            //test 1 checks if operator is wrong
+            test1 = false;
+            printf("Invalid operator");
+
+        }else if(((inBase < 2) || (inBase > 10)) || ((outBase < 2) || (outBase > 10))){
+            //test 2 checks if base range is wrong
+            test2 = false;
+            printf("Invalid base");
+        }else{
+            //test 3 checks if oeprand is wrong large 
+            //test 3
+            int checkNum1 = 0, checkNum2 = 0, digit1 = 0, digit2 = 0;
+            checkNum1 = num1, checkNum2 = num2;
+
+                //checks if the digits in the numbers inputted are smaller then the first base 
+                while (checkNum1 != 0){
+                    digit1 = checkNum1%10;
+                    if (digit1 >= inBase){
+                        test31 = false;
+                    }
+                    checkNum1 = checkNum1/10;
+                }
+
+                while (checkNum2 != 0){
+                    digit2 = checkNum2%10;
+                    if (digit2 >= inBase){
+                        test32 = false;
+                    }
+                    checkNum2 = checkNum2/10;
+                }
+//if any of the cases are false, then the user is told that the digits inputted are invalid
+                if(test31 == false || test32 == false){
+                    printf("Invalid digits in operand");
+                }
+        }
+
+        //only runs if all test cases were passed 
+
+        if ((test1 == true) && (test2 == true) && (test31 == true) && (test32 == true)){
+            //converts numbers from base entered to base 10
+
+//displays specific operation based on the specific operation the user enters
+            if(operation == '+'){
+                  printf("%d + %d (base %d) = ", num1, num2, inBase);
+            }else if (operation == '-'){
+                  printf("%d - %d (base %d) = ", num1, num2, inBase);
+            }else if (operation == '*'){
+                  printf("%d * %d (base %d) = ", num1, num2, inBase);
+            }else{
+                  printf("%d / %d (base %d) = ", num1, num2, inBase);
+            }
+//converts numbers to base 10 
+            while(num1 != 0){
+                base1num1 += (num1%10)*pow(inBase, counter);
+                num1 = num1/10;
+                counter++;
+            }
+
+            counter = 0;
+            while(num2 != 0){
+                base1num2 += (num2%10)*pow(inBase, counter);
+                num2 = num2/10;
+                counter++;
+            }
+            printf("%d %c %d", base1num1, operation, base1num2);
+
+//performs specific operation based on the operation entered by the user
+            int total = 0;
+            if(operation == '+'){
+                total = base1num1 + base1num2;
+            }else if (operation == '-'){
+                total = base1num1 - base1num2;
+            }else if (operation == '*'){
+                total = base1num1 * base1num2;
+            }else{
+                total = base1num1 / base1num2;
+            }
+            int finalTotal = 0;
+//converts number from base 10 to the base specified
+            for (int i = 0; total != 0; i++){
+                finalTotal += (total%outBase)*pow(10, i);
+                total = total/outBase;
+            }
+//output is printed 
+            printf(" = %d (base %d)", finalTotal, outBase);
+        }
+//user is asked for character input which is checked once the loop runs again
+        printf("\nGive input ($ to stop): ");
+        
+        scanf(" %c", &operation);
+
+        
+    }
+
+
+
+    return 0;
+}
+
