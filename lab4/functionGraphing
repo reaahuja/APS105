@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+
+int getOrder(){
+//retrieve the order of the function 
+    int order = 0;
+    printf("Enter the order of the function: ");
+    scanf("%d", &order);
+
+    return order;
+}
+
+int getCoefficient(int value){
+//retrieve the coefficient for the indicated x value of the function
+    int coefficient = 0;
+    printf("Enter coefficient of x^%d: ", value);
+    scanf("%d", &coefficient);
+
+    return coefficient;
+}
+
+int equationComputer(int order, int a, int b, int c, int d, int x){
+//retrieve values for the coefficients of the x values for the function 
+//create equation based on the order provided by the user and computes it for the given x value
+    int equation = 0;
+    if (order == 0){
+        equation = a;
+    }else if (order == 1){
+        equation = b*x + a;
+    }else if (order == 2){
+        equation = c*(pow(x, 2)) + b*x + a;
+    }else{
+        equation = d*(pow(x, 3)) + c*(pow(x, 2)) + b*x + a;
+    }
+
+    return equation;
+}
+
+bool validator(int equationValue){
+//checks if the equation value calculated is within the given domain & range
+    bool valid = true;
+    if (equationValue > 10 || equationValue < -10){
+        valid = false;
+    }else{
+        valid = true;
+    }
+
+    return valid;
+}
+
+bool orderValidator(int order){
+//checks if the given order is within the given range 
+//checks if the order given is the one specified to quite the function 
+    bool valid = true;
+    if ((order < 0 || order > 3) && order != -1){
+        printf("The order must be between [0, 3].\n");
+        valid = false;
+    }
+
+    return valid;
+}
+
+int main (void){
+    int order = 0, a = 0, b = 0, c = 0, d = 0, equationValue = 0;
+    bool valid = true, orderValid = true;
+    //retrieves order and checks if order is valid
+    order = getOrder();
+    orderValid = orderValidator(order);
+
+    //asks user to provide order until valid order is provided 
+    while(orderValid == false){
+        order = getOrder();
+        orderValid = orderValidator(order);
+    }
+
+
+    while (order != -1){
+    //retrieves the coefficients for the equation 
+        if (order == 0){
+            a = getCoefficient(0);
+        }else if (order == 1){
+            a = getCoefficient(0);
+            b = getCoefficient(1);
+        }else if (order == 2){
+            a = getCoefficient(0);
+            b = getCoefficient(1);
+            c = getCoefficient(2);
+        }else{
+            a = getCoefficient(0);
+            b = getCoefficient(1);
+            c = getCoefficient(2);
+            d = getCoefficient(3);
+        }
+
+        //loops through y values of -10 to 10, and x values of -10 to 10 
+        for (int y = -10; y <= 10; y++){
+            for (int x = -10; x <= 10; x++){
+            //computes the equation based on the coefficients provided and the given x value 
+                equationValue = equationComputer(order, a, b, c, d, x);
+                //checks if the equation value is valid
+                valid = validator(equationValue);
+                    //if equation value is valid and its equal to the y value then print a star 
+                    if (-equationValue == y && valid == true){
+                        printf(" * ");
+                    //if x = 0 print a vertical line to create the y-axis
+                    }else if (x == 0){
+                        printf(" | ");
+                    //if y = 0 print a horizontal line to form the x-axis
+                    }else if(y == 0){
+                        printf(" - ");
+                    }else{
+                    //print a space to create the rest of the grid 
+                        printf("   ");
+                    }
+            
+
+            }
+            printf("\n");
+            
+        }
+        //continues to ask the user to provide values to create more graphs 
+        order = getOrder();
+        orderValid = orderValidator(order);
+        
+        while(orderValid == false){
+            order = getOrder();
+            orderValid = orderValidator(order);
+        }
+    }
+
+    
+
+
+    return 0;
+}
