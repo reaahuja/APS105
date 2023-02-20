@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void){
+     //enter information 
+    double x = 0.00, y = 0.00;
+    printf("Enter the x-coordinate in floating point: ");
+    scanf("%lf", &x);
+    printf("Enter the y-coordinate in floating point: \n");
+    scanf("%lf", &y);
+
+    //round coordinates NEEDS FIXING
+    x = rint(x*100)/100;
+    y = rint(y*100)/100;
+
+    //determine axis or quadrant 
+
+    if(x == 0){
+        printf("(%.2lf, %.2lf) is on the y axis.\n", x, y);
+    }else if(y==0){
+        printf(" (%.2lf, %.2lf) is on the x axis.\n", x, y);
+
+    }else if (x > 0){
+        if(y > 0){
+            printf("(%.2lf, %.2lf) is in quadrant I.\n", x, y);
+        }else{
+            printf("(%.2lf, %.2lf) is in quadrant IV.\n", x, y);
+        }
+
+    }else{
+        if(y > 0){
+            printf("(%.2lf, %.2lf) is in quadrant II.\n", x, y);
+        }else{
+            printf("(%.2lf, %.2lf) is in quadrant III.\n", x, y);
+        }
+    }
+    
+    
+
+}
