@@ -18,7 +18,7 @@ int main(void) {
 void populateBoxes(int boxes[], const int BoxesNum){
     int value = 0;
     for (int i = 0; i < BoxesNum; i++){
-        value = rand()%(3-0 + 1) + 0;
+        value = rand()%(3) -1;
         if (value == 0){
             boxes[i] = 0;
         }else if(value == 1){
